@@ -11,18 +11,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-state: '3.x'
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
 
-    - name: Run Challenge 06 Unit Tests
-      run: |
-        python3 -m unittest challenge_06_benefits_calculator/test_calculator.py
+      - name: Run Challenge 06 Unit Tests
+        working-directory: challenge_06_benefits_calculator
+        run: |
+          python -m unittest test_calculator.py
 
-    - name: Run Challenge 10 Unit Tests
-      run: |
-        python3 -m unittest challenge_10_fraud_detection/test_detector.py
+      - name: Run Challenge 10 Unit Tests
+        working-directory: challenge_10_fraud_detection
+        run: |
+          python -m unittest test_detector.py

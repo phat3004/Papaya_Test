@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Papaya Insurance - Compare Our Plans</title>
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Compare Papaya Insurance plan tiers side-by-side. Find the best health coverage with Bronze, Silver, and Gold tiers tailored for your needs.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            outfit: ['Outfit', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              500: '#2563eb',
+              600: '#1d4ed8',
+              700: '#1e40af',
+            },
+            success: '#10b981',
+            warning: '#f59e0b',
+            danger: '#ef4444',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background: radial-gradient(120% 120% at 50% 10%, #0f172a 40%, #1e1b4b 100%);
+      color: #f8fafc;
+    }
+    .glass-panel {
+      background: rgba(30, 41, 59, 0.45);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .glass-card {
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .glass-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(37, 99, 235, 0.4);
+      box-shadow: 0 20px 40px -15px rgba(37, 99, 235, 0.25);
+    }
+    .glow-effect {
+      position: relative;
+    }
+    .glow-effect::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      box-shadow: 0 0 25px 0px rgba(37, 99, 235, 0.15);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
+    }
+    .glow-effect:hover::after {
+      opacity: 1;
+    }
+    /* Simple custom switch styling */
+    .toggle-checkbox:checked + .toggle-label {
+      background-color: #2563eb;
+    }
+    .toggle-checkbox:checked + .toggle-label .toggle-dot {
+      transform: translateX(100%);
+    }
+  </style>
+</head>
+<body class="font-sans antialiased min-h-screen selection:bg-brand-500 selection:text-white pb-20">
+
+  <!-- Header Section -->
+  <header class="max-w-7xl mx-auto px-6 pt-12 pb-8 text-center">
+    <div class="inline-flex items-center gap-2 mb-4 px-4 py-1.5 rounded-full bg-slate-800/80 border border-slate-700/50 backdrop-blur-md">
+      <span class="w-2 h-2 rounded-full bg-brand-500 animate-pulse"></span>
+      <span class="text-xs font-semibold text-brand-100 uppercase tracking-widest font-outfit">Papaya Insurance Infrastructure</span>
+    </div>
+    
+    <h1 class="text-4xl md:text-6xl font-extrabold font-outfit tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-100 to-slate-400 mb-4">
+      Compare Our Protection Plans
+    </h1>
+    <p class="text-slate-400 max-w-2xl mx-auto text-base md:text-lg">
+      Simple, transparent, and comprehensive coverage. Select the tier that matches your personal or corporate requirements.
+    </p>
+
+    <!-- Monthly/Annual Toggle -->
+    <div class="mt-8 flex items-center justify-center gap-3">
+      <span class="text-sm font-medium text-slate-400" id="billing-monthly-label">Monthly Billing</span>
+      <div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+        <input type="checkbox" name="toggle" id="toggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 border-slate-800 appearance-none cursor-pointer outline-none transition-transform duration-200 ease-in-out"/>
+        <label for="toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-slate-700 cursor-pointer">
+          <span class="toggle-dot block w-6 h-6 rounded-full bg-white transition-transform duration-200"></span>
+        </label>
+      </div>
+      <span class="text-sm font-medium text-slate-400 flex items-center gap-1.5" id="billing-annual-label">
+        Annual Billing
+        <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-semibold font-outfit">Save 10%</span>
+      </span>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-7xl mx-auto px-6">
+    
+    <!-- Desktop Comparison Table / Card Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+      
+      <!-- Bronze Plan Card -->
+      <div class="glass-card rounded-3xl p-8 flex flex-col justify-between relative overflow-hidden" id="plan-bronze">
+        <div>
+          <div class="flex justify-between items-start mb-6">
+            <div>
+              <h3 class="text-2xl font-bold font-outfit text-white">Bronze</h3>
+              <p class="text-slate-400 text-sm mt-1">Essential everyday protection</p>
+            </div>
+          </div>
+          
+          <div class="mb-6">
+            <div class="flex items-baseline">
+              <span class="text-slate-400 text-2xl font-light">$</span>
+              <span class="text-5xl font-extrabold font-outfit text-white transition-all duration-300" id="price-bronze">150</span>
+              <span class="text-slate-400 text-sm ml-2">/ month</span>
+            </div>
+            <p class="text-xs text-slate-500 mt-1" id="annual-total-bronze">Billed monthly ($1,800/year)</p>
+          </div>
+
+          <div class="border-t border-slate-800 pt-6 space-y-4">
+            <div class="flex justify-between items-center text-sm">
+              <span class="text-slate-400">Annual Limit</span>
+              <span class="font-semibold text-white">$500,000</span>
+            </div>
+            <div class="flex justify-between items-center text-sm">
+              <span class="text-slate-400">Copay</span>
+              <span class="font-semibold text-red-400">20%</span>
+            </div>
+            <div class="flex justify-between items-center text-sm">
+              <span class="text-slate-400">Waiting Period</span>
+              <span class="font-semibold text-slate-300">30 Days</span>
+            </div>
+          </div>
+
+          <div class="border-t border-slate-800 my-6 pt-6 space-y-4">
+            <h4 class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Benefits Summary</h4>
+            <ul class="space-y-3">
+              <li class="flex items-start gap-3 text-sm text-slate-300">
+                <span class="flex-shrink-0 w-5 h-5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">✓</span>
+                <div>
+                  <span class="font-medium text-white">Outpatient Care</span>
+                  <p class="text-xs text-slate-400">Max $3,000/visit, up to 30 visits/year</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-3 text-sm text-slate-300">
+                <span class="flex-shrink-0 w-5 h-5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">✓</span>
+                <div>
+                  <span class="font-medium text-white">Inpatient Care</span>
+                  <p class="text-xs text-slate-400">Max $10,000/day, up to 60 days/year</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-3 text-sm text-slate-500">
+                <span class="flex-shrink-0 w-5 h-5 rounded-full bg-slate-800 border border-slate-700 text-slate-500 flex items-center justify-center font-bold">✕</span>
+                <div>
+                  <span class="line-through">Dental Coverage</span>
+                  <p class="text-xs text-slate-600">Not included</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-3 text-sm text-slate-500">
+                <span class="flex-shrink-0 w-5 h-5 rounded-full bg-slate-800 border border-slate-700 text-slate-500 flex items-center justify-center font-bold">✕</span>
+                <div>
+                  <span class="line-through">Maternity Care</span>
+                  <p class="text-xs text-slate-600">Not included</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mt-6">
+          <button class="w-full py-3.5 rounded-xl font-semibold font-outfit text-sm bg-slate-800 hover:bg-slate-750 text-white border border-slate-700 hover:border-slate-600 transition duration-200">
+            Choose Bronze Plan
+          </button>
+        </div>
+      </div>
+
+      <!-- Silver Plan Card (Recommended) -->
+      <div class="glass-card rounded-3xl p-8 flex flex-col justify-between relative overflow-hidden border-2 border-brand-500/80 shadow-lg shadow-brand-500/10" id="plan-silver">
+        <!-- Recommended Badge -->
+        <div class="absolute top-0 right-0 bg-brand-500 text-white text-xs font-bold font-outfit tracking-wide uppercase px-5 py-1.5 rounded-bl-2xl shadow-sm flex items-center gap-1">
+          ★ Recommended Value
+        </div>
+
+        <div>
+          <div class="flex justify-between items-start mb-6">
+            <div>
+              <h3 class="text-2xl font-bold font-outfit text-white">Silver</h3>
+              <p class="text-brand-300 text-sm mt-1">Excellent standard coverage</p>
+            </div>
+          </div>
+          
+          <div class="mb-6">
+            <div class="flex items-baseline">
+              <span class="text-slate-400 text-2xl font-light">$</span>
+              <span class="text-5xl font-extrabold font-outfit text-white transition-all duration-300" id="price-silver">350</span>
+              <span class="text-slate-400 text-sm ml-2">/ month</span>
+            </div>
+            <p class="text-xs text-brand-200 mt-1" id="annual-total-silver">Billed monthly ($4,200/year)</p>
+          </div>
+
+          <div class="border-t border-slate-800 pt-6 space-y-4">
+            <div class="flex justify-between items-center text-sm">
+              <span class="text-slate-400">Annual Limit</span>
+              <span class="font-semibold text-white flex items-center gap-1.5">
+                $1,500,000
+              </span>
+            </div>
+            <div class="flex justify-between items-center text-sm">
+              <span class="text-slate-400">Copay</span>
+              <span class="font-semibold text-brand-400">10%</span>
+            </div>
+            <div class="flex justify-between items-center text-sm">
+              <span class="text-slate-400">Waiting Period</span>
+              <span class="font-semibold text-slate-300">15 Days</span>
+            </div>
+          </div>
+
+          <div class="border-t border-slate-800 my-6 pt-6 space-y-4">
+            <h4 class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Benefits Summary</h4>
+            <ul class="space-y-3">
+              <li class="flex items-start gap-3 text-sm text-slate-300">
+                <span class="flex-shrink-0 w-5 h-5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">✓</span>
+                <div>
+                  <span class="font-medium text-white">Outpatient Care</span>
+                  <p class="text-xs text-slate-400">Max $5,000/visit, up to 60 visits/year</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-3 text-sm text-slate-300">
+                <span class="flex-shrink-0 w-5 h-5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">✓</span>
+                <div>
+                  <span class="font-medium text-white">Inpatient Care</span>
+                  <p class="text-xs text-slate-400">Max $25,000/day, up to 120 days/year</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-3 text-sm text-slate-300">
+                <span class="flex-shrink-0 w-5 h-5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">✓</span>
+                <div>
+                  <span class="font-medium text-white">Dental Coverage</span>
+                  <p class="text-xs text-slate-400">Up to $30,000/year included</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-3 text-sm text-slate-500">
+                <span class="flex-shrink-0 w-5 h-5 rounded-full bg-slate-800 border border-slate-700 text-slate-500 flex items-center justify-center font-bold">✕</span>
+                <div>
+                  <span class="line-through">Maternity Care</span>
+                  <p class="text-xs text-slate-600">Not included</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mt-6">
+          <button class="w-full py-3.5 rounded-xl font-semibold font-outfit text-sm bg-brand-500 hover:bg-brand-600 text-white transition duration-200 shadow-md shadow-brand-500/20">
+            Choose Silver Plan
+          </button>
+        </div>
+      </div>
+
+      <!-- Gold Plan Card -->
+      <div class="glass-card rounded-3xl p-8 flex flex-col justify-between relative overflow-hidden" id="plan-gold">
+        <div>
+          <div class="flex justify-between items-start mb-6">
+            <div>
+              <h3 class="text-2xl font-bold font-outfit text-white">Gold</h3>
+              <p class="text-slate-400 text-sm mt-1">Premium unlimited protection</p>
+            </div>
+          </div>
+          
+          <div class="mb-6">
+            <div class="flex items-baseline">
+              <span class="text-slate-400 text-2xl font-light">$</span>
+              <span class="text-5xl font-extrabold font-outfit text-white transition-all duration-300" id="price-gold">700</span>
+              <span class="text-slate-400 text-sm ml-2">/ month</span>
+            </div>
+            <p class="text-xs text-slate-500 mt-1" id="annual-total-gold">Billed monthly ($8,400/year)</p>
+          </div>
+
+          <div class="border-t border-slate-800 pt-6 space-y-4">
+            <div class="flex justify-between items-center text-sm">
+              <span class="text-slate-400">Annual Limit</span>
+              <span class="font-semibold text-emerald-400 flex items-center gap-1 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/25">
+                $5,000,000 (Best)
+              </span>
+            </div>
+            <div class="flex justify-between items-center text-sm">
+              <span class="text-slate-400">Copay</span>
+              <span class="font-semibold text-emerald-400 flex items-center gap-1 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/25">
+                0% (Best)
+              </span>
+            </div>
+            <div class="flex justify-between items-center text-sm">
+              <span class="text-slate-400">Waiting Period</span>
+              <span class="font-semibold text-emerald-400 flex items-center gap-1 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/25">
+                None (Best)
+              </span>
+            </div>
+          </div>
+
+          <div class="border-t border-slate-800 my-6 pt-6 space-y-4">
+            <h4 class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Benefits Summary</h4>
+            <ul class="space-y-3">
+              <li class="flex items-start gap-3 text-sm text-slate-300">
+                <span class="flex-shrink-0 w-5 h-5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">✓</span>
+                <div>
+                  <span class="font-medium text-white">Outpatient Care</span>
+                  <p class="text-xs text-emerald-400">Max $10,000/visit, Unlimited visits</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-3 text-sm text-slate-300">
+                <span class="flex-shrink-0 w-5 h-5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">✓</span>
+                <div>
+                  <span class="font-medium text-white">Inpatient Care</span>
+                  <p class="text-xs text-emerald-400">Max $50,000/day, Unlimited days</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-3 text-sm text-slate-300">
+                <span class="flex-shrink-0 w-5 h-5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">✓</span>
+                <div>
+                  <span class="font-medium text-white">Dental Coverage</span>
+                  <p class="text-xs text-slate-400">Up to $100,000/year included</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-3 text-sm text-slate-300">
+                <span class="flex-shrink-0 w-5 h-5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">✓</span>
+                <div>
+                  <span class="font-medium text-white">Maternity Care</span>
+                  <p class="text-xs text-slate-400">Up to $200,000/pregnancy included</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mt-6">
+          <button class="w-full py-3.5 rounded-xl font-semibold font-outfit text-sm bg-slate-800 hover:bg-slate-750 text-white border border-slate-700 hover:border-slate-600 transition duration-200">
+            Choose Gold Plan
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Detailed Matrix Section (Desktop Only) -->
+    <div class="hidden md:block">
+      <h2 class="text-2xl font-bold font-outfit text-white mb-6 text-center">Detailed Plan Breakdown</h2>
+      
+      <div class="glass-panel rounded-3xl overflow-hidden shadow-2xl">
+        <table class="w-full border-collapse text-left">
+          <thead>
+            <tr class="border-b border-slate-800 bg-slate-900/60">
+              <th class="p-6 font-outfit font-semibold text-slate-300 text-sm">Feature / Benefit</th>
+              <th class="p-6 font-outfit font-semibold text-white text-sm w-1/4">Bronze</th>
+              <th class="p-6 font-outfit font-semibold text-white text-sm w-1/4">Silver</th>
+              <th class="p-6 font-outfit font-semibold text-white text-sm w-1/4 bg-brand-500/5">Gold</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-800/50 text-sm">
+            <!-- Pricing Row -->
+            <tr class="hover:bg-slate-800/10 transition">
+              <td class="p-6 text-slate-400 font-medium">Monthly Cost</td>
+              <td class="p-6 text-white font-bold" id="table-price-bronze">$150</td>
+              <td class="p-6 text-white font-bold" id="table-price-silver">$350</td>
+              <td class="p-6 text-white font-bold bg-brand-500/5" id="table-price-gold">$700</td>
+            </tr>
+            <!-- Annual Limit -->
+            <tr class="hover:bg-slate-800/10 transition">
+              <td class="p-6 text-slate-400 font-medium">Annual Policy Limit</td>
+              <td class="p-6 text-slate-300">$500,000</td>
+              <td class="p-6 text-slate-300">$1,500,000</td>
+              <td class="p-6 bg-brand-500/5 text-emerald-400 font-semibold">
+                $5,000,000 <span class="text-xs px-1.5 py-0.5 rounded bg-emerald-500/15 border border-emerald-500/25 ml-1">Best</span>
+              </td>
+            </tr>
+            <!-- Copay -->
+            <tr class="hover:bg-slate-800/10 transition">
+              <td class="p-6 text-slate-400 font-medium">Copayment Percentage</td>
+              <td class="p-6 text-red-400 font-medium">20%</td>
+              <td class="p-6 text-slate-300">10%</td>
+              <td class="p-6 bg-brand-500/5 text-emerald-400 font-semibold">
+                0% <span class="text-xs px-1.5 py-0.5 rounded bg-emerald-500/15 border border-emerald-500/25 ml-1">Best</span>
+              </td>
+            </tr>
+            <!-- Outpatient Limit -->
+            <tr class="hover:bg-slate-800/10 transition">
+              <td class="p-6 text-slate-400 font-medium">Outpatient - Limit per Visit</td>
+              <td class="p-6 text-slate-300">$3,000</td>
+              <td class="p-6 text-slate-300">$5,000</td>
+              <td class="p-6 bg-brand-500/5 text-emerald-400 font-semibold">
+                $10,000 <span class="text-xs px-1.5 py-0.5 rounded bg-emerald-500/15 border border-emerald-500/25 ml-1">Best</span>
+              </td>
+            </tr>
+            <!-- Outpatient Visits -->
+            <tr class="hover:bg-slate-800/10 transition">
+              <td class="p-6 text-slate-400 font-medium">Outpatient - Visits per Year</td>
+              <td class="p-6 text-slate-300">30 visits</td>
+              <td class="p-6 text-slate-300">60 visits</td>
+              <td class="p-6 bg-brand-500/5 text-emerald-400 font-semibold">
+                Unlimited <span class="text-xs px-1.5 py-0.5 rounded bg-emerald-500/15 border border-emerald-500/25 ml-1">Best</span>
+              </td>
+            </tr>
+            <!-- Inpatient Limit -->
+            <tr class="hover:bg-slate-800/10 transition">
+              <td class="p-6 text-slate-400 font-medium">Inpatient - Limit per Day</td>
+              <td class="p-6 text-slate-300">$10,000</td>
+              <td class="p-6 text-slate-300">$25,000</td>
+              <td class="p-6 bg-brand-500/5 text-emerald-400 font-semibold">
+                $50,000 <span class="text-xs px-1.5 py-0.5 rounded bg-emerald-500/15 border border-emerald-500/25 ml-1">Best</span>
+              </td>
+            </tr>
+            <!-- Inpatient Days -->
+            <tr class="hover:bg-slate-800/10 transition">
+              <td class="p-6 text-slate-400 font-medium">Inpatient - Max Days per Year</td>
+              <td class="p-6 text-slate-300">60 days</td>
+              <td class="p-6 text-slate-300">120 days</td>
+              <td class="p-6 bg-brand-500/5 text-emerald-400 font-semibold">
+                Unlimited <span class="text-xs px-1.5 py-0.5 rounded bg-emerald-500/15 border border-emerald-500/25 ml-1">Best</span>
+              </td>
+            </tr>
+            <!-- Dental -->
+            <tr class="hover:bg-slate-800/10 transition">
+              <td class="p-6 text-slate-400 font-medium">Dental - Annual Limit</td>
+              <td class="p-6 text-slate-500">Not Covered</td>
+              <td class="p-6 text-slate-300">$30,000</td>
+              <td class="p-6 bg-brand-500/5 text-emerald-400 font-semibold">
+                $100,000 <span class="text-xs px-1.5 py-0.5 rounded bg-emerald-500/15 border border-emerald-500/25 ml-1">Best</span>
+              </td>
+            </tr>
+            <!-- Maternity -->
+            <tr class="hover:bg-slate-800/10 transition">
+              <td class="p-6 text-slate-400 font-medium">Maternity - Limit per Pregnancy</td>
+              <td class="p-6 text-slate-500">Not Covered</td>
+              <td class="p-6 text-slate-500">Not Covered</td>
+              <td class="p-6 bg-brand-500/5 text-emerald-400 font-semibold">
+                $200,000 <span class="text-xs px-1.5 py-0.5 rounded bg-emerald-500/15 border border-emerald-500/25 ml-1">Best</span>
+              </td>
+            </tr>
+            <!-- Waiting Period -->
+            <tr class="hover:bg-slate-800/10 transition">
+              <td class="p-6 text-slate-400 font-medium">Waiting Period</td>
+              <td class="p-6 text-slate-300">30 days</td>
+              <td class="p-6 text-slate-300">15 days</td>
+              <td class="p-6 bg-brand-500/5 text-emerald-400 font-semibold">
+                0 days <span class="text-xs px-1.5 py-0.5 rounded bg-emerald-500/15 border border-emerald-500/25 ml-1">Best</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+  </main>
+
+  <footer class="mt-20 border-t border-slate-800/60 pt-8 text-center text-xs text-slate-500">
+    <p>© 2026 Papaya Insurance. Built for AI Engineering Challenge 01.</p>
+  </footer>
+
+  <!-- Billing Toggle Logic script -->
+  <script>
+    const checkbox = document.getElementById('toggle');
+    
+    const priceBronze = document.getElementById('price-bronze');
+    const priceSilver = document.getElementById('price-silver');
+    const priceGold = document.getElementById('price-gold');
+    
+    const tablePriceBronze = document.getElementById('table-price-bronze');
+    const tablePriceSilver = document.getElementById('table-price-silver');
+    const tablePriceGold = document.getElementById('table-price-gold');
+    
+    const annualTotalBronze = document.getElementById('annual-total-bronze');
+    const annualTotalSilver = document.getElementById('annual-total-silver');
+    const annualTotalGold = document.getElementById('annual-total-gold');
+    
+    const labelMonthly = document.getElementById('billing-monthly-label');
+    const labelAnnual = document.getElementById('billing-annual-label');
+
+    // Prices
+    const rates = {
+      bronze: { monthly: 150, annual: 135 }, // 10% discount
+      silver: { monthly: 350, annual: 315 },
+      gold: { monthly: 700, annual: 630 }
+    };
+
+    checkbox.addEventListener('change', () => {
+      const isAnnual = checkbox.checked;
+      
+      if (isAnnual) {
+        // Apply 10% discount for annual
+        priceBronze.textContent = rates.bronze.annual;
+        priceSilver.textContent = rates.silver.annual;
+        priceGold.textContent = rates.gold.annual;
+        
+        if (tablePriceBronze) tablePriceBronze.textContent = `$${rates.bronze.annual} / mo`;
+        if (tablePriceSilver) tablePriceSilver.textContent = `$${rates.silver.annual} / mo`;
+        if (tablePriceGold) tablePriceGold.textContent = `$${rates.gold.annual} / mo`;
+
+        annualTotalBronze.textContent = 'Billed annually ($1,620/year)';
+        annualTotalSilver.textContent = 'Billed annually ($3,780/year)';
+        annualTotalGold.textContent = 'Billed annually ($7,560/year)';
+        
+        labelAnnual.classList.add('text-brand-500');
+        labelMonthly.classList.remove('text-brand-500');
+      } else {
+        // Reset to monthly
+        priceBronze.textContent = rates.bronze.monthly;
+        priceSilver.textContent = rates.silver.monthly;
+        priceGold.textContent = rates.gold.monthly;
+
+        if (tablePriceBronze) tablePriceBronze.textContent = `$${rates.bronze.monthly}`;
+        if (tablePriceSilver) tablePriceSilver.textContent = `$${rates.silver.monthly}`;
+        if (tablePriceGold) tablePriceGold.textContent = `$${rates.gold.monthly}`;
+
+        annualTotalBronze.textContent = 'Billed monthly ($1,800/year)';
+        annualTotalSilver.textContent = 'Billed monthly ($4,200/year)';
+        annualTotalGold.textContent = 'Billed monthly ($8,400/year)';
+        
+        labelMonthly.classList.add('text-brand-500');
+        labelAnnual.classList.remove('text-brand-500');
+      }
+    });
+
+    // Init styles
+    labelMonthly.classList.add('text-brand-500');
+  </script>
+</body>
+</html>

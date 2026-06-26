@@ -1,0 +1,182 @@
+[
+  {
+    "expense_id": "EXP-001",
+    "date": "2024-01-10",
+    "benefit_type": "OUTPATIENT",
+    "sub_benefit": "Doctor Visit",
+    "amount": 2500,
+    "diagnosis": "Common cold",
+    "provider": "Bangkok General Clinic"
+  },
+  {
+    "expense_id": "EXP-002",
+    "date": "2024-01-15",
+    "benefit_type": "OUTPATIENT",
+    "sub_benefit": "Doctor Visit",
+    "amount": 4000,
+    "diagnosis": "Acute bronchitis",
+    "provider": "Bangkok Hospital"
+  },
+  {
+    "expense_id": "EXP-003",
+    "date": "2024-01-20",
+    "benefit_type": "OUTPATIENT",
+    "sub_benefit": "Prescribed Medicine",
+    "amount": 2000,
+    "diagnosis": "Acute bronchitis",
+    "provider": "Bangkok Pharmacy"
+  },
+  {
+    "expense_id": "EXP-004",
+    "date": "2024-02-01",
+    "benefit_type": "DENTAL",
+    "sub_benefit": "Basic Dental",
+    "amount": 1500,
+    "diagnosis": "Dental caries cleaning",
+    "provider": "Dental Smile Clinic"
+  },
+  {
+    "expense_id": "EXP-005",
+    "date": "2024-02-10",
+    "benefit_type": "INPATIENT",
+    "sub_benefit": "Room & Board",
+    "amount": 12000,
+    "diagnosis": "Dengue Fever",
+    "provider": "Samitivej Hospital"
+  },
+  {
+    "expense_id": "EXP-006",
+    "date": "2024-02-15",
+    "benefit_type": "OUTPATIENT",
+    "sub_benefit": "Diagnostic Tests",
+    "amount": 22000,
+    "diagnosis": "Heart palpitations MRI",
+    "provider": "Bumrungrad Hospital"
+  },
+  {
+    "expense_id": "EXP-007",
+    "date": "2024-02-20",
+    "benefit_type": "OUTPATIENT",
+    "sub_benefit": "Diagnostic Tests",
+    "amount": 5000,
+    "diagnosis": "Follow-up blood test",
+    "provider": "Bumrungrad Hospital"
+  },
+  {
+    "expense_id": "EXP-008",
+    "date": "2024-03-01",
+    "benefit_type": "OUTPATIENT",
+    "sub_benefit": "Doctor Visit",
+    "amount": 15000,
+    "diagnosis": "Cosmetic surgery and elective procedures",
+    "provider": "Yanhee Aesthetic Hospital"
+  },
+  {
+    "expense_id": "EXP-009",
+    "date": "2024-03-10",
+    "benefit_type": "MATERNITY",
+    "sub_benefit": "Prenatal Care",
+    "amount": 5000,
+    "diagnosis": "First trimester ultrasound",
+    "provider": "Phyathai Hospital"
+  },
+  {
+    "expense_id": "EXP-010",
+    "date": "2024-04-15",
+    "benefit_type": "DENTAL",
+    "sub_benefit": "Basic Dental",
+    "amount": 5000,
+    "diagnosis": "Tooth extraction",
+    "provider": "Dental Smile Clinic"
+  },
+  {
+    "expense_id": "EXP-011",
+    "date": "2024-05-01",
+    "benefit_type": "OUTPATIENT",
+    "sub_benefit": "Doctor Visit",
+    "amount": 3000,
+    "diagnosis": "Self-inflicted injuries from cutting",
+    "provider": "Bangkok General Clinic"
+  },
+  {
+    "expense_id": "EXP-012",
+    "date": "2024-06-01",
+    "benefit_type": "OUTPATIENT",
+    "sub_benefit": "Doctor Visit",
+    "amount": 2500,
+    "diagnosis": "Allergic rhinitis",
+    "provider": "Bangkok General Clinic"
+  },
+  {
+    "expense_id": "EXP-013",
+    "date": "2024-07-01",
+    "benefit_type": "OUTPATIENT",
+    "sub_benefit": "Doctor Visit",
+    "amount": 2500,
+    "diagnosis": "Stomach flu",
+    "provider": "Bangkok General Clinic"
+  },
+  {
+    "expense_id": "EXP-014",
+    "date": "2024-08-01",
+    "benefit_type": "OUTPATIENT",
+    "sub_benefit": "Doctor Visit",
+    "amount": 2500,
+    "diagnosis": "Tension headache",
+    "provider": "Bangkok General Clinic"
+  },
+  {
+    "expense_id": "EXP-015",
+    "date": "2024-09-15",
+    "benefit_type": "DENTAL",
+    "sub_benefit": "Major Dental",
+    "amount": 15000,
+    "diagnosis": "Root canal therapy",
+    "provider": "Dental Smile Clinic"
+  },
+  {
+    "expense_id": "EXP-016",
+    "date": "2024-09-20",
+    "benefit_type": "DENTAL",
+    "sub_benefit": "Major Dental",
+    "amount": 3000,
+    "diagnosis": "Follow-up crown fitting",
+    "provider": "Dental Smile Clinic"
+  },
+  {
+    "expense_id": "EXP-017",
+    "date": "2024-10-10",
+    "benefit_type": "MATERNITY",
+    "sub_benefit": "Normal Delivery",
+    "amount": 150000,
+    "diagnosis": "Childbirth normal delivery",
+    "provider": "Samitivej Hospital"
+  },
+  {
+    "expense_id": "EXP-018",
+    "date": "2024-10-15",
+    "benefit_type": "MATERNITY",
+    "sub_benefit": "Prenatal Care",
+    "amount": 4000,
+    "diagnosis": "Post-natal checkup",
+    "provider": "Samitivej Hospital"
+  },
+  {
+    "expense_id": "EXP-019",
+    "date": "2024-11-01",
+    "benefit_type": "MATERNITY",
+    "sub_benefit": "C-Section",
+    "amount": 120000,
+    "diagnosis": "Childbirth emergency c-section",
+    "provider": "Bumrungrad Hospital"
+  },
+  {
+    "expense_id": "EXP-020",
+    "date": "2024-11-15",
+    "benefit_type": "MATERNITY",
+    "sub_benefit": "Prenatal Care",
+    "amount": 5000,
+    "diagnosis": "General follow-up",
+    "provider": "Bumrungrad Hospital"
+  }
+]

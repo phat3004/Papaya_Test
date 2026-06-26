@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Papaya Insurance - Terminology Glossary</title>
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Search and browse standard insurance terms across claims, underwriting, reinsurance, and regulations. Interactive, fast, and offline glossary tool.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            outfit: ['Outfit', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#faf5ff',
+              100: '#f3e8ff',
+              500: '#a855f7',
+              600: '#9333ea',
+              700: '#7e22ce',
+              800: '#6b21a8',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background: radial-gradient(110% 110% at 50% 10%, #0b0f19 30%, #1e112c 100%);
+      color: #f1f5f9;
+    }
+    .glass-panel {
+      background: rgba(23, 28, 41, 0.45);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .glass-card {
+      background: rgba(23, 28, 41, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .glass-card:hover {
+      border-color: rgba(168, 85, 247, 0.3);
+      background: rgba(30, 27, 75, 0.3);
+    }
+    .highlight {
+      background-color: rgba(168, 85, 247, 0.3);
+      color: #f3e8ff;
+      padding: 0.1rem 0.2rem;
+      border-radius: 0.25rem;
+      font-weight: 500;
+    }
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .no-scrollbar {
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+    }
+  </style>
+</head>
+<body class="font-sans antialiased min-h-screen pb-10">
+
+  <!-- Header Section -->
+  <header class="max-w-7xl mx-auto px-6 pt-10 pb-6">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div>
+        <div class="inline-flex items-center gap-2 mb-2 px-3 py-1 rounded-full bg-purple-950/60 border border-purple-800/40 text-purple-300">
+          <span class="text-xs font-semibold uppercase tracking-wider font-outfit">Reference Desk</span>
+        </div>
+        <h1 class="text-3xl md:text-4xl font-extrabold font-outfit tracking-tight text-white">
+          Insurance Terminology Glossary
+        </h1>
+        <p class="text-slate-400 text-sm mt-1">
+          Explore and master insurance terminology across claims, coverage, life & health, reinsurance, and regulations.
+        </p>
+      </div>
+
+      <!-- Search Input -->
+      <div class="relative w-full md:w-96">
+        <input 
+          type="text" 
+          id="search-input" 
+          placeholder="Search name & definition..." 
+          class="w-full bg-slate-900/80 border border-slate-800 rounded-2xl px-5 py-3.5 pr-12 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition"
+        >
+        <span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none">
+          🔍
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Layout Container -->
+  <main class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-8 mt-4 relative items-start">
+    
+    <!-- Left Sidebar: Category Accordion (lg:col-span-3) -->
+    <aside class="lg:col-span-3 space-y-4">
+      <div class="glass-panel rounded-2xl p-5">
+        <h2 class="text-sm font-bold font-outfit text-slate-300 uppercase tracking-wider mb-4">Categories</h2>
+        <div class="space-y-1.5" id="category-list">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
+      
+      <div class="glass-panel rounded-2xl p-5 hidden lg:block">
+        <h3 class="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-2">Usage Tip</h3>
+        <p class="text-xs text-slate-500 leading-relaxed">
+          Use the A-Z list on the right to jump directly to terms alphabetically, or search directly for instantly highlighted matches.
+        </p>
+      </div>
+    </aside>
+
+    <!-- Center: Terms List (lg:col-span-6) -->
+    <section class="lg:col-span-6 space-y-6">
+      <!-- Active filters display -->
+      <div id="filter-status" class="hidden flex items-center justify-between bg-purple-950/30 border border-purple-900/40 rounded-xl px-4 py-2 text-xs text-purple-300">
+        <span id="filter-text">Showing: All Categories</span>
+        <button onclick="resetFilters()" class="font-semibold underline hover:text-purple-200">Clear filter</button>
+      </div>
+
+      <div class="space-y-8" id="terms-container">
+        <!-- Populated by JavaScript -->
+      </div>
+    </section>
+
+    <!-- Right: Sticky Details & Alphabet Jump (lg:col-span-3) -->
+    <aside class="lg:col-span-3 lg:sticky lg:top-8 flex gap-6 items-start">
+      
+      <!-- Term Detail Card -->
+      <div class="flex-1 glass-panel rounded-3xl p-6 min-h-[300px] flex flex-col justify-between" id="detail-panel">
+        <div id="detail-content">
+          <div class="text-center text-slate-500 py-12">
+            <span class="text-3xl block mb-2">📖</span>
+            <p class="text-sm font-medium">Select a term to view complete definitions, categories, and related terms.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- A-Z Jump Bar -->
+      <div class="w-10 bg-slate-900/50 border border-slate-800/80 rounded-2xl py-3 flex flex-col items-center gap-1.5 text-[10px] font-bold text-slate-500 select-none">
+        <div class="flex flex-col gap-1 items-center h-[420px] overflow-y-auto no-scrollbar" id="alphabet-sidebar">
+          <!-- Populated by JavaScript A-Z -->
+        </div>
+      </div>
+      
+    </aside>
+
+  </main>
+
+  <script>
+    // Glossary Data (40+ items)
+    const glossaryData = [
+      {
+        id: "premium",
+        name: "Premium",
+        category: "General Insurance",
+        definition: "The amount of money an individual or business pays for an insurance policy. It represents the income of the insurance company and the cost to keep the policy active.",
+        related: ["policyholder", "deductible", "lapse"]
+      },
+      {
+        id: "policyholder",
+        name: "Policyholder",
+        category: "General Insurance",
+        definition: "The individual or entity who owns the insurance policy and pays the premiums. They have the legal right to request policy changes and file claims.",
+        related: ["premium", "beneficiary", "claim"]
+      },
+      {
+        id: "underwriting",
+        name: "Underwriting",
+        category: "General Insurance",
+        definition: "The process of assessing risk, determining whether to accept a policyholder, and calculating the premium to charge. It maintains pool balance and stability.",
+        related: ["actuarial", "premium", "rider"]
+      },
+      {
+        id: "endorsement",
+        name: "Endorsement",
+        category: "General Insurance",
+        definition: "A written amendment or rider added to an insurance policy that alters its terms, coverage limits, or benefits. It can expand, restrict, or modify standard features.",
+        related: ["rider", "policyholder"]
+      },
+      {
+        id: "rider",
+        name: "Rider",
+        category: "General Insurance",
+        definition: "An optional add-on clause to an insurance policy that provides additional benefits beyond the core policy for an extra cost. Examples include critical illness or dental riders.",
+        related: ["endorsement", "premium"]
+      },
+      {
+        id: "grace-period",
+        name: "Grace Period",
+        category: "General Insurance",
+        definition: "A set period of time after a premium payment due date during which the coverage remains in force, allowing the policyholder to pay the premium late without losing coverage.",
+        related: ["premium", "lapse"]
+      },
+      {
+        id: "lapse",
+        name: "Lapse",
+        category: "General Insurance",
+        definition: "The termination of an insurance policy due to non-payment of premiums beyond the grace period. Once a policy lapses, the insurer has no liability for claims.",
+        related: ["grace-period", "premium"]
+      },
+      {
+        id: "claim",
+        name: "Claim",
+        category: "Claims",
+        definition: "A formal request sent by a policyholder to the insurance company asking for payment or compensation for a loss covered by the policy terms.",
+        related: ["adjudication", "deductible", "copay"]
+      },
+      {
+        id: "deductible",
+        name: "Deductible",
+        category: "Claims",
+        definition: "The amount of money the policyholder must pay out-of-pocket for medical or repair services before the insurance company starts covering costs.",
+        related: ["copay", "coinsurance", "out-of-pocket-maximum"]
+      },
+      {
+        id: "copay",
+        name: "Copay",
+        category: "Claims",
+        definition: "A fixed dollar amount that a policyholder is required to pay at the time of receiving a specific medical service, with the insurer paying the remaining balance.",
+        related: ["deductible", "coinsurance"]
+      },
+      {
+        id: "coinsurance",
+        name: "Coinsurance",
+        category: "Claims",
+        definition: "The percentage of covered healthcare expenses that a policyholder pays after meeting their deductible. For example, a 20% coinsurance rate means the insurer pays 80%.",
+        related: ["deductible", "copay", "out-of-pocket-maximum"]
+      },
+      {
+        id: "adjudication",
+        name: "Adjudication",
+        category: "Claims",
+        definition: "The process by which an insurance company reviews a submitted claim to determine if it is valid, meets policy rules, and determines the correct payout amount.",
+        related: ["claim", "subrogation", "compliance"]
+      },
+      {
+        id: "subrogation",
+        name: "Subrogation",
+        category: "Claims",
+        definition: "The legal process where an insurance company pursues a third party that caused an insurance loss to the insured, seeking to recover the claims payment amount.",
+        related: ["claim", "adjudication"]
+      },
+      {
+        id: "out-of-pocket-maximum",
+        name: "Out-of-pocket Maximum",
+        category: "Claims",
+        definition: "The maximum amount of money a policyholder has to pay for covered services in a plan year. Once this limit is hit, the plan pays 100% of covered benefits.",
+        related: ["deductible", "copay", "coinsurance"]
+      },
+      {
+        id: "in-network-provider",
+        name: "In-network Provider",
+        category: "Claims",
+        definition: "A physician, hospital, or clinic that has contracted with the insurance company to provide services to members at negotiated, pre-agreed lower rates.",
+        related: ["out-of-network-provider", "claim"]
+      },
+      {
+        id: "out-of-network-provider",
+        name: "Out-of-network Provider",
+        category: "Claims",
+        definition: "A healthcare provider who does not have a contract with the insurance company, usually leading to higher copays or complete claim denials for the member.",
+        related: ["in-network-provider", "claim"]
+      },
+      {
+        id: "loss-adjustment-expense",
+        name: "Loss Adjustment Expense",
+        category: "Claims",
+        definition: "The cost incurred by an insurance company when investigating, negotiating, and settling a claim. It includes legal fees and claims adjuster fees.",
+        related: ["claim", "adjudication"]
+      },
+      {
+        id: "sum-insured",
+        name: "Sum Insured",
+        category: "Coverage",
+        definition: "The maximum liability value that an insurance company agrees to pay under the policy. It acts as the upper cap on the compensation of any single claim.",
+        related: ["annual-limit", "sub-limit"]
+      },
+      {
+        id: "annual-limit",
+        name: "Annual Limit",
+        category: "Coverage",
+        definition: "The maximum amount of money the insurance company will pay for all covered claims combined during a single policy year. Limits reset upon policy renewal.",
+        related: ["sum-insured", "sub-limit"]
+      },
+      {
+        id: "sub-limit",
+        name: "Sub-limit",
+        category: "Coverage",
+        definition: "A specific limitation within an insurance policy that caps coverage for a particular type of medical treatment, diagnosis, or benefit subcategory.",
+        related: ["annual-limit", "exclusion"]
+      },
+      {
+        id: "exclusion",
+        name: "Exclusion",
+        category: "Coverage",
+        definition: "Specific conditions, treatments, situations, or items that are explicitly listed in the policy document as not covered by the insurance company.",
+        related: ["sub-limit", "pre-existing-condition"]
+      },
+      {
+        id: "waiting-period",
+        name: "Waiting Period",
+        category: "Coverage",
+        definition: "The specific duration of time that must pass after purchasing a policy before a member can receive reimbursement for certain benefits, such as maternity or dental.",
+        related: ["exclusion", "pre-existing-condition"]
+      },
+      {
+        id: "pre-existing-condition",
+        name: "Pre-existing Condition",
+        category: "Coverage",
+        definition: "Any health issue, medical condition, or illness that the member had, was diagnosed with, or received treatment for prior to the effective date of the policy.",
+        related: ["waiting-period", "exclusion"]
+      },
+      {
+        id: "prior-authorization",
+        name: "Prior Authorization",
+        category: "Coverage",
+        definition: "A requirement by health plans for members or doctors to obtain approval from the insurance company before receiving certain medical treatments or medicines.",
+        related: ["exclusion", "claim"]
+      },
+      {
+        id: "beneficiary",
+        name: "Beneficiary",
+        category: "Life & Health",
+        definition: "The designated person or legal entity chosen by a policyholder to receive the payout benefits from a life insurance policy upon the policyholder's death.",
+        related: ["policyholder", "maturity"]
+      },
+      {
+        id: "maturity",
+        name: "Maturity",
+        category: "Life & Health",
+        definition: "The date on which an insurance policy or savings plan reaches its end term. At maturity, the policyholder receives the accumulated sum or cash payout.",
+        related: ["beneficiary", "surrender-value"]
+      },
+      {
+        id: "surrender-value",
+        name: "Surrender Value",
+        category: "Life & Health",
+        definition: "The cash amount that a life insurance policyholder is entitled to receive if they terminate the policy before its maturity date, minus any surrender fees.",
+        related: ["maturity", "policyholder"]
+      },
+      {
+        id: "mortality-table",
+        name: "Mortality Table",
+        category: "Life & Health",
+        definition: "A statistical table showing the probability of death for individuals at each age, used by actuaries to calculate premium rates and risk levels for life policies.",
+        related: ["actuarial", "underwriting"]
+      },
+      {
+        id: "actuarial",
+        name: "Actuarial",
+        category: "Life & Health",
+        definition: "Relating to the mathematical and statistical methodologies used to calculate risk, premiums, and reserves for future uncertain events in insurance portfolios.",
+        related: ["mortality-table", "underwriting", "reserve"]
+      },
+      {
+        id: "ceding-company",
+        name: "Ceding Company",
+        category: "Reinsurance",
+        definition: "An insurance company that transfers a portion of its underwritten risk exposures to a reinsurer, purchasing safety and capacity in return.",
+        related: ["retrocession", "treaty", "cede"]
+      },
+      {
+        id: "cede",
+        name: "Cede",
+        category: "Reinsurance",
+        definition: "The action of transferring insurance risk from the primary writing insurance company (the ceding company) to a secondary reinsurance provider.",
+        related: ["ceding-company", "reinsurer"]
+      },
+      {
+        id: "reinsurer",
+        name: "Reinsurer",
+        category: "Reinsurance",
+        definition: "A financial institution that provides reinsurance to primary insurance companies, helping them absorb massive losses and scale their operations.",
+        related: ["cede", "ceding-company"]
+      },
+      {
+        id: "retrocession",
+        name: "Retrocession",
+        category: "Reinsurance",
+        definition: "The transaction by which a reinsurer transfers some of the risks it has accepted from primary insurers to yet another reinsuring firm.",
+        related: ["ceding-company", "treaty"]
+      },
+      {
+        id: "treaty",
+        name: "Treaty",
+        category: "Reinsurance",
+        definition: "A broad, long-term contract between a ceding company and a reinsurer detailing terms under which the reinsurer automatically accepts specified blocks of risk.",
+        related: ["facultative", "ceding-company"]
+      },
+      {
+        id: "facultative",
+        name: "Facultative",
+        category: "Reinsurance",
+        definition: "Reinsurance purchased on a case-by-case basis for specific, high-value, or unique risks that fall outside standard automatic treaty agreements.",
+        related: ["treaty", "ceding-company"]
+      },
+      {
+        id: "loss-ratio",
+        name: "Loss Ratio",
+        category: "Reinsurance",
+        definition: "The ratio of claims paid out by an insurer to the total premiums collected. It serves as a key indicator of underwriting profitability and stability.",
+        related: ["reserve", "solvency"]
+      },
+      {
+        id: "solvency",
+        name: "Solvency",
+        category: "Regulatory",
+        definition: "The financial ability of an insurance company to meet its long-term policy obligations and pay out claims even in extreme loss scenarios.",
+        related: ["reserve", "compliance", "loss-ratio"]
+      },
+      {
+        id: "reserve",
+        name: "Reserve",
+        category: "Regulatory",
+        definition: "Funds set aside by an insurance company specifically allocated to pay for future claims and liabilities that have occurred or are expected to occur.",
+        related: ["solvency", "ibnr", "actuarial"]
+      },
+      {
+        id: "ibnr",
+        name: "IBNR",
+        category: "Regulatory",
+        definition: "Incurred But Not Reported. An actuarial estimate of claims that have occurred but have not yet been submitted to the insurance company for processing.",
+        related: ["reserve", "actuarial"]
+      },
+      {
+        id: "statutory-reporting",
+        name: "Statutory Reporting",
+        category: "Regulatory",
+        definition: "The mandatory financial and operational reports submitted by insurance companies to state or national regulators to demonstrate solvency and code compliance.",
+        related: ["compliance", "solvency"]
+      },
+      {
+        id: "compliance",
+        name: "Compliance",
+        category: "Regulatory",
+        definition: "Adherence by an insurance company to the laws, licensing standards, policy rules, and regulatory frameworks set up by governing insurance authorities.",
+        related: ["statutory-reporting", "solvency"]
+      }
+    ];
+
+    // Categories array
+    const categories = [...new Set(glossaryData.map(item => item.category))];
+
+    let activeCategory = null;
+    let searchQuery = "";
+    let activeLetter = null;
+
+    // Dom Elements
+    const searchInput = document.getElementById("search-input");
+    const categoryList = document.getElementById("category-list");
+    const termsContainer = document.getElementById("terms-container");
+    const detailPanel = document.getElementById("detail-panel");
+    const alphabetSidebar = document.getElementById("alphabet-sidebar");
+    const filterStatus = document.getElementById("filter-status");
+    const filterText = document.getElementById("filter-text");
+
+    // Initialize UI
+    function init() {
+      // 1. Render Categories Accordion
+      renderCategories();
+      
+      // 2. Render Alphabet Jump Bar
+      renderAlphabet();
+      
+      // 3. Render Terms List
+      renderTerms();
+      
+      // Setup Search Listener
+      searchInput.addEventListener("input", (e) => {
+        searchQuery = e.target.value.toLowerCase();
+        renderTerms();
+      });
+    }
+
+    function renderCategories() {
+      categoryList.innerHTML = "";
+      
+      // Add 'All' option
+      const allDiv = document.createElement("button");
+      allDiv.className = `w-full text-left px-3 py-2 rounded-xl text-xs font-semibold font-outfit transition flex justify-between items-center ${activeCategory === null ? 'bg-brand-600 text-white shadow' : 'text-slate-400 hover:bg-slate-900/60'}`;
+      allDiv.innerHTML = `<span>📂 All Categories</span> <span class="bg-slate-950/40 text-[10px] px-2 py-0.5 rounded-full">${glossaryData.length}</span>`;
+      allDiv.onclick = () => selectCategory(null);
+      categoryList.appendChild(allDiv);
+
+      categories.forEach(cat => {
+        const count = glossaryData.filter(item => item.category === cat).length;
+        const catButton = document.createElement("button");
+        catButton.className = `w-full text-left px-3 py-2 rounded-xl text-xs font-semibold font-outfit transition flex justify-between items-center ${activeCategory === cat ? 'bg-brand-600 text-white shadow' : 'text-slate-400 hover:bg-slate-900/60'}`;
+        catButton.innerHTML = `<span>📁 ${cat}</span> <span class="bg-slate-950/40 text-[10px] px-2 py-0.5 rounded-full">${count}</span>`;
+        catButton.onclick = () => selectCategory(cat);
+        categoryList.appendChild(catButton);
+      });
+    }
+
+    function selectCategory(cat) {
+      activeCategory = cat;
+      activeLetter = null; // Clear letter filter on category change
+      renderCategories();
+      updateFilterBar();
+      renderTerms();
+    }
+
+    function renderAlphabet() {
+      alphabetSidebar.innerHTML = "";
+      const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+      letters.forEach(l => {
+        const btn = document.createElement("button");
+        btn.className = `w-full py-0.5 text-center font-bold font-outfit cursor-pointer hover:text-brand-500 hover:scale-115 transition ${activeLetter === l ? 'text-brand-500 font-extrabold text-sm' : 'text-slate-500'}`;
+        btn.innerText = l;
+        btn.onclick = () => filterByLetter(l);
+        alphabetSidebar.appendChild(btn);
+      });
+    }
+
+    function filterByLetter(letter) {
+      activeLetter = letter;
+      renderAlphabet();
+      updateFilterBar();
+      renderTerms();
+      
+      // Scroll to top of list
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function updateFilterBar() {
+      if (activeCategory || searchQuery || activeLetter) {
+        filterStatus.classList.remove("hidden");
+        let txt = "Showing: ";
+        if (activeCategory) txt += `📁 ${activeCategory} `;
+        if (activeLetter) txt += `🔤 Starts with ${activeLetter} `;
+        if (searchQuery) txt += `🔍 Search for "${searchQuery}" `;
+        filterText.innerText = txt;
+      } else {
+        filterStatus.classList.add("hidden");
+      }
+    }
+
+    function resetFilters() {
+      activeCategory = null;
+      activeLetter = null;
+      searchQuery = "";
+      searchInput.value = "";
+      renderCategories();
+      renderAlphabet();
+      updateFilterBar();
+      renderTerms();
+    }
+
+    function highlightText(text, query) {
+      if (!query) return text;
+      const regex = new RegExp(`(${escapeRegExp(query)})`, "gi");
+      return text.replace(regex, '<span class="highlight">$1</span>');
+    }
+
+    function escapeRegExp(string) {
+      return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+
+    function renderTerms() {
+      termsContainer.innerHTML = "";
+      
+      // Filter list
+      let filtered = glossaryData;
+      
+      if (activeCategory) {
+        filtered = filtered.filter(item => item.category === activeCategory);
+      }
+      
+      if (activeLetter) {
+        filtered = filtered.filter(item => item.name.toUpperCase().startsWith(activeLetter));
+      }
+      
+      if (searchQuery) {
+        filtered = filtered.filter(item => 
+          item.name.toLowerCase().includes(searchQuery) || 
+          item.definition.toLowerCase().includes(searchQuery)
+        );
+      }
+      
+      // Sort alphabetically
+      filtered.sort((a, b) => a.name.localeCompare(b.name));
+      
+      if (filtered.length === 0) {
+        termsContainer.innerHTML = `
+          <div class="glass-panel rounded-2xl p-10 text-center text-slate-500">
+            <p class="text-lg">No glossary terms found matching current filters.</p>
+            <button onclick="resetFilters()" class="mt-4 px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-xs font-semibold">
+              Reset Filters
+            </button>
+          </div>
+        `;
+        return;
+      }
+      
+      // Render cards
+      filtered.forEach(item => {
+        const card = document.createElement("div");
+        card.id = `term-${item.id}`;
+        card.className = "glass-card rounded-2xl p-6 cursor-pointer glow-effect";
+        card.onclick = () => selectTerm(item);
+        
+        card.innerHTML = `
+          <div class="flex items-center justify-between gap-3 mb-2">
+            <h3 class="text-xl font-bold font-outfit text-white">${highlightText(item.name, searchQuery)}</h3>
+            <span class="text-[10px] bg-slate-900 border border-slate-800 text-slate-400 px-2.5 py-0.5 rounded-full uppercase tracking-wider font-semibold font-outfit">
+              ${item.category}
+            </span>
+          </div>
+          <p class="text-sm text-slate-400 leading-relaxed line-clamp-2">
+            ${highlightText(item.definition, searchQuery)}
+          </p>
+        `;
+        termsContainer.appendChild(card);
+      });
+    }
+
+    function selectTerm(item) {
+      // Find active element to update styles if needed
+      document.querySelectorAll('.glass-card').forEach(c => {
+        c.classList.remove('border-brand-500');
+        c.classList.remove('bg-purple-950/15');
+      });
+      const selectedCard = document.getElementById(`term-${item.id}`);
+      if (selectedCard) {
+        selectedCard.classList.add('border-brand-500');
+        selectedCard.classList.add('bg-purple-950/15');
+      }
+
+      // Populate details panel
+      const detailContent = document.getElementById("detail-content");
+      
+      // Build related terms links
+      let relatedHtml = `<p class="text-xs text-slate-500 italic">No related terms.</p>`;
+      if (item.related && item.related.length > 0) {
+        relatedHtml = `<div class="flex flex-wrap gap-2">`;
+        item.related.forEach(relId => {
+          const relItem = glossaryData.find(g => g.id === relId);
+          if (relItem) {
+            relatedHtml += `
+              <button onclick="navigateToTerm('${relItem.id}')" class="text-xs bg-brand-600/10 hover:bg-brand-600/25 border border-brand-500/20 text-brand-300 px-3 py-1.5 rounded-lg transition font-medium">
+                ${relItem.name} →
+              </button>
+            `;
+          }
+        });
+        relatedHtml += `</div>`;
+      }
+      
+      detailContent.innerHTML = `
+        <div class="space-y-5">
+          <div>
+            <span class="text-[10px] bg-brand-600/20 text-brand-300 px-2 py-0.5 border border-brand-500/20 rounded-full font-semibold uppercase tracking-wider font-outfit">
+              ${item.category}
+            </span>
+            <h2 class="text-2xl font-bold font-outfit text-white mt-2">${item.name}</h2>
+          </div>
+          
+          <div class="border-t border-slate-800/80 pt-4">
+            <h4 class="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-1.5">Definition</h4>
+            <p class="text-sm text-slate-200 leading-relaxed">${item.definition}</p>
+          </div>
+          
+          <div class="border-t border-slate-800/80 pt-4">
+            <h4 class="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-2.5">Related Terms</h4>
+            ${relatedHtml}
+          </div>
+        </div>
+      `;
+      
+      // Scroll details panel into view on mobile
+      if (window.innerWidth < 1024) {
+        detailPanel.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    function navigateToTerm(id) {
+      const item = glossaryData.find(g => g.id === id);
+      if (item) {
+        // Reset category / letter filters if the target term doesn't match
+        let matches = true;
+        if (activeCategory && item.category !== activeCategory) matches = false;
+        if (activeLetter && !item.name.toUpperCase().startsWith(activeLetter)) matches = false;
+        
+        if (!matches) {
+          resetFilters();
+        }
+        
+        // Render and highlight card
+        renderTerms();
+        
+        // Select term in details pane
+        selectTerm(item);
+        
+        // Scroll the card into view
+        const card = document.getElementById(`term-${item.id}`);
+        if (card) {
+          card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
+    }
+
+    // Initialize
+    init();
+  </script>
+</body>
+</html>
